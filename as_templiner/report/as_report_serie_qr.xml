@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="label_series_qr_view_pdf">
+            <t t-call="web.basic_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t>
+                        <div class="page">
+                            <div class="oe_structure" />
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <table class="table table-condensed"
+                                        style="border-bottom: 0px solid white !important;width:100%;text-align:center !important;">
+                                        <thead>
+                                            <tr>
+
+                                                <th colspan="2" style="text-align:center !important;">
+                                                    <img t-att-src="o.get_codqr_url(str(o.name))"
+                                                        style="max-height:4.5cm;max-width:3.5cm;" />
+
+                                                </th>
+                                            </tr>
+
+                                            <tr>
+                                                <th style="text-align:center !important;">
+
+                                                    <span t-esc="o.product_id.as_sku" />
+                                                </th>
+
+                                                <th style="text-align:center !important;">
+                                                    <span t-esc="o.ref" />
+
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </t>
+                    <p style="page-break-before:always;" />
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="label_series_qr_view_pdf">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="series">
+                      
+
+                            <img t-att-src="image_data_uri(series.get_qrcode(str(series.name)))"
+                                style="max-height:3.5cm;max-width:3cm;" />
+
+                            <p style="page-break-before:always;" />
+
+                    
+                    </t>
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo> -->
