@@ -16,7 +16,7 @@
         "base","stock","product","report_xlsx","mrp"
     ],
     'data': [
-        # 'security/ir.model.access.csv',
+        # 'security/ir.model.access.csv',#########
         'views/as_mrp_serie.xml',
         'wizard/mrp_product_produce.xml',
         'views/as_report_format.xml',
