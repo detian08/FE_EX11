@@ -9,7 +9,7 @@
                 <xpath expr="//field[@name='barcode']" position="after">
                     <field name="as_sku" />
                 </xpath>
-
+                     
             </data>
         </field>
     </record>

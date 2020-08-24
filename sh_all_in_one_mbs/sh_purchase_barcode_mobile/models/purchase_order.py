@@ -57,15 +57,20 @@ class purchase_order(models.Model):
                 search_lines = self.order_line.filtered(lambda ol: ol.product_id.sh_qr_code == self.sh_purchase_barcode_mobile)   
                 domain = [("sh_qr_code","=",self.sh_purchase_barcode_mobile)]                
                 
-            elif self.env.user.company_id.sudo().sh_purchase_barcode_mobile_type == "all":         
+            elif self.env.user.company_id.sudo().sh_purchase_barcode_mobile_type == "all":    
+                lot = 0
+                lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                if lote:
+                    lot = lote.product_id.id     
                 search_lines = self.order_line.filtered(lambda ol: ol.product_id.barcode == self.sh_purchase_barcode_mobile 
                                                         or ol.product_id.default_code == self.sh_purchase_barcode_mobile
                                                         or ol.product_id.sh_qr_code == self.sh_purchase_barcode_mobile
-                                                        )   
+                                                        or ol.product_id.id == lot)   
                 domain = ["|","|",
                     ("default_code","=",self.sh_purchase_barcode_mobile),
                     ("barcode","=",self.sh_purchase_barcode_mobile),
-                    ("sh_qr_code","=",self.sh_purchase_barcode_mobile)                    
+                    ("sh_qr_code","=",self.sh_purchase_barcode_mobile),
+                    ("id","=",lot),                     
                 
                 ]                                              
             if search_lines:

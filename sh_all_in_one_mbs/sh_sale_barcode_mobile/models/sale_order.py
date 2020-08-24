@@ -40,7 +40,7 @@ class sale_order(models.Model):
             if self.env.user.company_id.sudo().sh_sale_bm_is_notify_on_fail:
                 message = _(CODE_SOUND_FAIL + 'You can not scan item in %s state.')% (value)
                 
-                self.env.user.notify_warning(message, title=_('Failed'), sticky=False)     
+                # self.env.user.notify_warning(message, title=_('Failed'), sticky=False)     
                                 
                 
             return
@@ -61,12 +61,18 @@ class sale_order(models.Model):
                 search_lines = self.order_line.filtered(lambda ol: ol.product_id.sh_qr_code == self.sh_sale_barcode_mobile)   
                 domain = [("sh_qr_code","=",self.sh_sale_barcode_mobile)]                
                  
-            elif self.env.user.company_id.sudo().sh_sale_barcode_mobile_type == "all":            
-                search_lines = self.order_line.filtered(lambda ol: ol.product_id.barcode == self.sh_sale_barcode_mobile or ol.product_id.default_code == self.sh_sale_barcode_mobile or ol.product_id.sh_qr_code == self.sh_sale_barcode_mobile)   
-                domain = ["|","|",
+            elif self.env.user.company_id.sudo().sh_sale_barcode_mobile_type == "all": 
+                lot = 0
+                lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                if lote:
+                    lot = lote.product_id.id
+                search_lines = self.order_line.filtered(lambda ol: ol.product_id.barcode == self.sh_sale_barcode_mobile or ol.product_id.default_code == self.sh_sale_barcode_mobile or ol.product_id.sh_qr_code == self.sh_sale_barcode_mobile or ol.product_id.id == lot) 
+
+                domain = ["|","|","|",
                     ("default_code","=",self.sh_sale_barcode_mobile),
                     ("barcode","=",self.sh_sale_barcode_mobile),
                     ("sh_qr_code","=",self.sh_sale_barcode_mobile),                    
+                    ("id","=",lot),                    
                 ]                                             
             if search_lines:
                 for line in search_lines:
@@ -105,4 +111,4 @@ class sale_order(models.Model):
                 else:
                     if self.env.user.company_id.sudo().sh_sale_bm_is_notify_on_fail:    
                         message = _(CODE_SOUND_FAIL + 'Scanned Internal Reference/Barcode not exist in any product!')                  
-                        self.env.user.notify_warning(message, title=_('Failed'), sticky=False)     
+                        # self.env.user.notify_warning(message, title=_('Failed'), sticky=False)     
