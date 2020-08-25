@@ -61,7 +61,7 @@ class StockInventory(models.Model):
                 
             elif self.env.user.company_id.sudo().sh_inventory_adjt_barcode_mobile_type == 'all':
                 lot = 0
-                lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                lote = self.env["stock.production.lot"].search([('name','=',self.sh_inventory_adjt_barcode_mobile)])
                 if lote:
                     lot = lote.product_id.id     
                 search_lines = self.line_ids.filtered(lambda l: l.product_id.barcode == self.sh_inventory_adjt_barcode_mobile 

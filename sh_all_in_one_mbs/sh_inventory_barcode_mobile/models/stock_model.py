@@ -132,7 +132,7 @@ class stock_move(models.Model):
                      
                 elif self.env.user.company_id.sudo().sh_stock_barcode_mobile_type == 'all':
                     lot = 0
-                    lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                    lote = self.env["stock.production.lot"].search([('name','=',self.sh_stock_move_barcode_mobile)])
                     if lote:
                         lot = lote.product_id.id     
                     if self.product_id.barcode == self.sh_stock_move_barcode_mobile or self.product_id.default_code == self.sh_stock_move_barcode_mobile or self.product_id.sh_qr_code == self.sh_stock_move_barcode_mobile or self.product_id.id == lot:
@@ -230,7 +230,7 @@ class stock_picking(models.Model):
                                 
             elif self.env.user.company_id.sudo().sh_stock_barcode_mobile_type == 'all':
                 lot = 0
-                lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                lote = self.env["stock.production.lot"].search([('name','=',self.sh_stock_barcode_mobile)])
                 if lote:
                     lot = lote.product_id.id     
                 search_mls = self.move_lines.filtered(lambda ml: ml.product_id.barcode == self.sh_stock_barcode_mobile 

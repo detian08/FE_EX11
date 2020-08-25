@@ -70,7 +70,7 @@ class account_invoice(models.Model):
                                 
             elif self.env.user.company_id.sudo().sh_invoice_barcode_mobile_type == "all":          
                 lot = 0
-                lote = self.env["stock.production.lot"].search([('name','=',self.sh_sale_barcode_mobile)])
+                lote = self.env["stock.production.lot"].search([('name','=',self.sh_invoice_barcode_mobile)])
                 if lote:
                     lot = lote.product_id.id      
                 search_lines = self.invoice_line_ids.filtered(lambda ol: ol.product_id.barcode == self.sh_invoice_barcode_mobile 
