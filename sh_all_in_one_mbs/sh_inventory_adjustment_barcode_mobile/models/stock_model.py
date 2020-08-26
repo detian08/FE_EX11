@@ -67,7 +67,7 @@ class StockInventory(models.Model):
                 search_lines = self.line_ids.filtered(lambda l: l.product_id.barcode == self.sh_inventory_adjt_barcode_mobile 
                                                       or l.product_id.default_code == self.sh_inventory_adjt_barcode_mobile
                                                       or l.product_id.sh_qr_code == self.sh_inventory_adjt_barcode_mobile or l.product_id.id == lot)
-                domain = ["|","|",
+                domain = ["|","|","|",
                     ("default_code","=",self.sh_inventory_adjt_barcode_mobile),
                     ("barcode","=",self.sh_inventory_adjt_barcode_mobile),
                     ("sh_qr_code","=",self.sh_inventory_adjt_barcode_mobile),

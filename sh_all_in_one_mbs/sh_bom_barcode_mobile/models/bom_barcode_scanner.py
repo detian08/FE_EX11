@@ -56,7 +56,7 @@ class mrp_bom(models.Model):
                 search_lines = self.bom_line_ids.filtered(lambda ol: ol.product_id.barcode == self.sh_bom_barcode_mobile 
                                                           or ol.product_id.default_code == self.sh_bom_barcode_mobile
                                                           or ol.product_id.sh_qr_code == self.sh_bom_barcode_mobile or ol.product_id.id == lot)
-                domain = ["|","|",
+                domain = ["|","|","|",
                     ("default_code","=",self.sh_bom_barcode_mobile),
                     ("barcode","=",self.sh_bom_barcode_mobile),
                     ("sh_qr_code","=",self.sh_bom_barcode_mobile),  

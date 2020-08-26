@@ -66,7 +66,7 @@ class purchase_order(models.Model):
                                                         or ol.product_id.default_code == self.sh_purchase_barcode_mobile
                                                         or ol.product_id.sh_qr_code == self.sh_purchase_barcode_mobile
                                                         or ol.product_id.id == lot)   
-                domain = ["|","|",
+                domain = ["|","|","|",
                     ("default_code","=",self.sh_purchase_barcode_mobile),
                     ("barcode","=",self.sh_purchase_barcode_mobile),
                     ("sh_qr_code","=",self.sh_purchase_barcode_mobile),

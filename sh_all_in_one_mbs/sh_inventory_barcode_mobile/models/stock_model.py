@@ -237,7 +237,7 @@ class stock_picking(models.Model):
                                                                          or ml.product_id.default_code == self.sh_stock_barcode_mobile
                                                                          or ml.product_id.sh_qr_code == self.sh_stock_barcode_mobile
                                                                          or ml.product_id.id == lot)
-                domain = ["|","|",
+                domain = ["|","|","|",
                     ("default_code","=",self.sh_stock_barcode_mobile),
                     ("barcode","=",self.sh_stock_barcode_mobile),
                     ("sh_qr_code","=",self.sh_stock_barcode_mobile),
