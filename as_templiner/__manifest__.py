@@ -2,7 +2,7 @@
 {
     'name': "Ahorasoft Templiner Project",
     'category': 'Templiner',
-    'version': '1.0.0',
+    'version': '1.0.1',
     'author': "Ahorasoft",
     'website': 'http://www.ahorasoft.com',
     "support": "soporte@ahorasoft.com",
@@ -13,7 +13,7 @@
     """,
     "images": [],
     "depends": [
-        "base","stock","product","report_xlsx","mrp"
+        "base","stock","product","report_xlsx","mrp","quality_mrp"
     ],
     'data': [
         # 'security/ir.model.access.csv',#########
@@ -22,6 +22,7 @@
         'views/as_report_format.xml',
         'views/as_product_template.xml',
         'views/as_sequence.xml',
+        'views/as_mrp_production_work.xml',
         'report/as_report_serie_qr.xml',
       
     ],
